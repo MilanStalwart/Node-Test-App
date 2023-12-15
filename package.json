@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "@shopify/shopify-api": "^8.1.1",
+    "axios": "^1.6.2",
+    "body-parser": "^1.20.2",
+    "cookie": "^0.6.0",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^3.0.2",
+    "nonce": "^1.0.4",
+    "request-promise": "^4.2.6",
+    "shopify-api-node": "^3.12.7",
+    "shopify-node-api": "^1.11.1"
+  },
+  "type": "module",
+  "name": "demo-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
