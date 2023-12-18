@@ -16,26 +16,13 @@ const shopify = shopifyApi({
 
 const session = shopify.session.customAppSession("milan-r-dev.myshopify.com");
 
-let pageInfo;
 const pageSize = 3;
 let result = [];
 var products = await shopify.rest.Product.all({
   session: session,
-  ...pageInfo?.nextPage?.query,
-  limit: 5,
 });
 result = result.concat(products.data);
 
-let nextPageInfo = products.pageInfo?.nextPage?.query?.page_info;
-while (nextPageInfo) {
-  products = await shopify.rest.Product.all({
-    session,
-    page_info: nextPageInfo,
-  });
-
-  result = result.concat(products.data);
-  nextPageInfo = products.pageInfo?.nextPage?.query?.page_info;
-}
 function paginateArray(array, pageSize) {
   return array.reduce((accumulator, currentValue, index) => {
     const pageIndex = Math.floor(index / pageSize);
@@ -46,11 +33,27 @@ function paginateArray(array, pageSize) {
     return accumulator;
   }, []);
 }
+let pageNumber = 0;
 app.get("/", async (req, res) => {
-  const page = req.query.page || 1;
+   pageNumber = req.query.page || 1;
   const paginatedData = paginateArray(result, pageSize);
+  res.render('productTable', { paginatedData, currentPage: parseInt(pageNumber), totalPages: paginatedData.length });
+});
 
-  res.render('productDetails', { paginatedData, currentPage: parseInt(page), totalPages: paginatedData.length });
+
+app.get("/products", async (req, res) => {  
+  let productId = req.query.id;
+  if(productId != undefined){
+    var viewProduct = await shopify.rest.Product.find({
+      session: session,
+      id: parseInt(productId),
+    });
+    var finalProd = JSON.stringify(viewProduct)
+    let product = JSON.parse(finalProd) 
+    res.render('productDetails', {product, pageNumber});
+  }else{
+    res.status(404).send("<h1>Error 404 - Product Doesn't exist</h1>")
+  }
 });
 
 app.listen(80, () => console.log("Server is listening on port 80"));

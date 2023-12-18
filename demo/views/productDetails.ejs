@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Pagination</title>
+    <style>
+      body,*{padding: 0;margin: 0;font-family: Assistant, sans-serif;letter-spacing: 0.6px;}
+      .container{max-width: 1200px;display: block;width: 100%;padding: 15px 0;margin: 0 auto;}
+      .product-variant p { border: 1px solid #000; border-radius: 40px; color: rgb(18,18,18); display: inline-block; margin: 0.7rem 0.5rem 0.2rem 0; padding: 5px 15px; font-size: 1.4rem; letter-spacing: 0.1rem; line-height: 1; text-align: center; cursor: pointer; position: relative; }
+      .product-variant p:hover { color: #fff; background: #000; }
+      .product-status { font-weight: bold; font-size: 18px;margin: 10px 0;} 
+      .product-status span.status{ font-weight: normal; }
+      .main-wrapper { display: flex; gap: 15px; }
+      .main-wrapper > div {width: 100%;}
+      .product-img .wrapper {display: flex; flex-wrap: wrap; margin-bottom: 2rem; padding: 0; list-style: none; gap: 8px;justify-content: center;}
+      .product-img .wrapper img {max-width: calc(50% - 150px / 2); border: 1px solid;};
+      .main-wrapper .wrapper { width: 100%;position: sticky;top: 3rem;z-index: 2; }
+      .product-variant{margin-bottom: 20px;}
+      .product-variant  h4{font-size: 18px;}
+      .product__title{letter-spacing :0.6px;line-height:52px;font-size: 40px;word-break: break-word; margin-bottom: 10px;line-height: 52px;}
+      .vendor{font-size: 10px; letter-spacing: .1rem;color: #121212BF;}
+      .price{font-size: 18px; display: inline-block; margin: 0 1rem 0 0; font-family: Assistant, sans-serif;font-weight: normal;}
+      .discription ul{ margin: 10px 0 0 18px;}
+      .back-btn a { color: #000; font-size: 18px; text-transform: uppercase;}
+      .back-btn{margin-bottom: 20px;}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 style="text-align: center;margin-bottom: 30px;"> Product Details</h1>
+      <div class="main-wrapper">
+          <div class="product-img">
+            <div class="wrapper">
+              <% for (const image of product.images) {%>
+                  <img src="<%= image.src %>" alt="<%= image.id %>">
+              <%}%>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="wrapper">
+              <p class="back-btn"><a href="/?page=<%= pageNumber%>">/back</a></p>
+              <p class="vendor"><%= product.vendor %></p>
+              <h3 class="product__title"><%= product.title %>  </h3>
+              <b class="price"><b>Price -</b> $<%= product.variants[0].price %></h4>
+              <p class="product-status">Status - 
+                <span class="status"><%= product.status.charAt(0).toUpperCase() + product.status.slice(1)  %></span>
+                <span style="background: <%= product.status == 'active' ? '#198754': '#DC3545' %>; width: 10px;height: 10px; display: inline-block; border-radius: 50%;" ></span>
+              </p>
+              <div class="product-variant">
+                <div class="product-option-Color">
+                  <h4>Variants - </h4>
+                  <div class="variant-option">
+                    <% for (const variant of product.variants) {%>
+                      <% if(variant.title != 'Default Title'){ %>
+                        <p><%= variant.title %></p>
+                      <% }else{ %>
+                        <span>No Variant</span>
+                      <% }%>
+                    <% } %>
+                  </div>
+                </div>
+              </div>
+              <div class="discription">
+                <p><%- product.body_html %></p>
+              </div>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </body>
+</html>
