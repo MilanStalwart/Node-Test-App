@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+  .main-wrapper { display: flex; justify-content: space-around; align-items: center; } 
+  .main-wrapper > div { width: 100%; }
+  form input, form button, form textarea { display: block; padding: 10px; margin: 15px 0; }
+  label.error{color: red;}
+  </style>
+</head>
+<body>
+  <div class="main-wrapper">
+    <div class="product-form">
+      <form action="/submitForm" method="POST" class="product-form">
+        <div>
+          <input type="text" placeholder="Title" name="title" id="title" required>
+        </div>
+        <div>
+          <textarea type="text" placeholder="Body HTML" name="body_html" id="body-html" cols="50" rows="4" required></textarea>
+        </div>
+        <div>
+          <input type="text" placeholder="Vendor" name="vendor" id="vendor" required>
+        </div>
+        <div>
+          <input type="text" placeholder="Product Type" name="product_type" id="product-type" required>
+        </div>
+        <div>
+          <input type="text" placeholder="Image Link" name="img_src" id="img-src">
+        </div>
+        <div>
+          <select name="product_status" id="product-status" required>
+            <option value="draft" name="draft">Draft</option>
+            <option value="active" name="active">Active</option>
+          </select>
+        </div>
+        <button class="submit-btn" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"> </script>
+<script>
+$(document).ready (function () {  
+  console.log()
+    $("form.product-form").validate({
+        rules: {
+          product_status: 
+          {
+            required: true
+          }
+        }
+      });	
+}); 
+</script>
+</html>
