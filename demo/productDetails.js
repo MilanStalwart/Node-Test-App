@@ -6,10 +6,10 @@ const app = express();
 app.set('view engine', 'ejs');
 
 const shopify = shopifyApi({
-  apiKey: "564787232f953504bf617e4975ff5fc6",
-  apiSecretKey: "53076a6fbaa0eaf81e75f738eb0a557f",
-  hostName: "192d-2401-4900-1c80-28ee-1493-177-5918-395.ngrok-free.app",
-  adminApiAccessToken: "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",
+  apiKey: "API_KEY",
+  apiSecretKey: "API_SECRETE_KEY",
+  hostName: "NGROK_URL",
+  adminApiAccessToken: "PRIVATE_APP_ACCESS_TOKEN",
   isCustomStoreApp: true,
   restResources,
 });
