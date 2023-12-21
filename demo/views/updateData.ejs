@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Data</title>
+    <style>
+      body { font-family: "Arial", sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+      .container { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); width: 50%;}
+      .input-group { margin-bottom: 20px; width: 100%;}
+      .input-group label { display: block; font-weight: bold; margin-bottom: 5px; }
+      .input-group input { width: 100%; padding: 8px; box-sizing: border-box; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; }
+      .btn-submit { background-color: #4caf50; color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; width: 20%; margin: 0px 40%; display: inline-block;}
+      .btn-submit:hover { background-color: #45a049; }
+      .main-wrapper > div { display: flex; gap: 20px; }
+      .main-wrapper h2{ margin-top: 0;}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form action="/submit" method="post">
+        <div class="main-wrapper">
+          <h2>Fill input for find data</h2>
+          <div class="find-value">
+            <div class="input-group">
+              <label for="find_key">Enter key for find</label>
+              <input type="text" id="find_key" name="find_key" placeholder="Enter key for find" />
+            </div>
+            <div class="input-group">
+              <label for="find_value">Enter value for find</label>
+              <input type="text" id="find_value" name="find_value" placeholder="Enter value for find"/>
+            </div>
+          </div>
+          <h2>Fill input for update data</h2>
+          <div class="replace-value">
+            <div class="input-group">
+              <label for="update_key">Enter key for Update</label>
+              <input type="text" id="update_key" name="update_key" placeholder="Enter key for update" />
+            </div>
+            <div class="input-group">
+              <label for="update_value">Enter Value for Update</label>
+              <input type="text" id="update_value" name="update_value" placeholder="Enter value for update" />
+            </div>
+          </div>
+        </div>
+        <button class="btn-submit" type="submit">Submit</button>
+      </form>
+    </div>
+
+    <script>
+      function submitForm() {
+        // Add your form submission logic here
+        alert("Form submitted!");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Routes Information</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+      table {
+        border-collapse: collapse;
+        width: 60%;
+        margin: 20px auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+      th {
+        background-color: #007bff;
+        color: #fff;
+      }
+      td a {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      td a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 style="text-align: center">Routes Information</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Route</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="/fetch" target="_blank">/fetch</a></td>
+          <td>Endpoint to fetch all products</td>
+        </tr>
+        <tr>
+          <td><a href="/insert/?ans=no" target="_blank">/insert/?ans="yes OR not"</td>
+          <td>Endpoint to insert data. Write "Yes" or "Not" to update data</td>
+        </tr>
+        <tr>
+          <td><a href="/update" target="_blank">/update</a></td>
+          <td>Endpoint to update data</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
