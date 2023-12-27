@@ -1,5 +1,7 @@
 import { app, shopify, session, PORT, express } from "../config.js";
 import { client, dbName, collectName } from "../dbConnect.js";
+import bodyParser from "body-parser";
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // File Path
 import { fileURLToPath } from "url";
@@ -13,13 +15,21 @@ app.set("views", join(__dirname, "../views"));
 
 var products = await shopify.rest.Product.all({
   session: session,
+  limit: 2
 });
 
 app.get("/", (req, res) => {
   res.render("routesInfo");
 });
-app.get("/fetch", (req, res) => {
-  res.send(products);
+app.get("/all", (req, res) => {
+  res.send(products.data);
+});
+app.get("/fetch", async(req, res) => {
+  let connect = await client.connect();
+  let db = connect.db(dbName);
+  let collection = db.collection(collectName);
+  let result = await collection.find().toArray();
+  res.send(result);
 });
 app.get("/insert", async (req, res) => {
   let answer = req.query.ans;
@@ -46,34 +56,29 @@ app.get("/insert", async (req, res) => {
 });
 
 app.get("/update", async (req, res) => {
-  res.render('updateData');
-
-  // let connect = await client.connect();
-  // let db = connect.db(dbName);
-  // let collection = db.collection(collectName);
-  // let updatedData = await collection.updateMany(
-  //   {
-  //     key: value,
-  //   },
-  //   {
-  //     $set: { template_suffix: null },
-  //   }
-  // );
-  // if (updatedData.acknowledged) {
-  //   console.warn("updatedData is inserted");
-  // }
-  // res.send(updatedData);
+  var singleProducts = await shopify.rest.Product.all({
+    session: session,
+    limit: 1
+  });
+  var Products = singleProducts.data
+  res.render('updateData', {Products});
 });
-let  formData;
-app.post('/submit', (req, res) => {
-  // formData = {
-  //   find_key: req.body.find_key,
-  //   find_value: req.body.find_value,
-  //   update_key: req.body.update_key,
-  //   update_value: req.body.update_value
-  // };
-  console.log(req)
-  res.redirect('/update');
+
+app.post('/submitForm', async(req, res) => {
+  const {find_key,find_value,update_key,update_value } = req.body;
+  let connect = await client.connect();
+  let db = connect.db(dbName);
+  let collection = db.collection(collectName);
+  let query = {};
+  query[find_key] = find_value;
+
+  let update = { $set: {} };
+  update.$set[update_key] = update_value;
+  let updatedData = await collection.updateMany(query,update);
+  if (updatedData.acknowledged) {
+    console.warn("updatedData is inserted");
+  }
+  res.send(updatedData);
 });
 
 app.listen(PORT, () => console.log(`Now Listning ${PORT}`));

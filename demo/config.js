@@ -1,6 +1,6 @@
-// https://2bd5-2401-4900-1c80-28ee-8411-8f92-ad2d-62ab.ngrok-free.app/auth/callback
-// https://2bd5-2401-4900-1c80-28ee-8411-8f92-ad2d-62ab.ngrok-free.app/auth/shopify/callback
-// https://2bd5-2401-4900-1c80-28ee-8411-8f92-ad2d-62ab.ngrok-free.app/api/auth/callback
+// https://4d7e-2401-4900-1f3e-9df-306e-3b21-650c-7a66.ngrok-free.app/auth/callback
+// https://4d7e-2401-4900-1f3e-9df-306e-3b21-650c-7a66.ngrok-free.app/auth/shopify/callback
+// https://4d7e-2401-4900-1f3e-9df-306e-3b21-650c-7a66.ngrok-free.app/api/auth/callback
 
 import express from "express";
 const app = express();
